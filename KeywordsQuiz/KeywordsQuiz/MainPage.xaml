@@ -33,17 +33,13 @@
                         <Frame BorderColor="DarkGray"
                                Padding="1">
                             <Label Text="{Binding Keyword}"
-                                   TextColor="Transparent"
                                    VerticalTextAlignment="Center"
                                    HorizontalTextAlignment="Center">
                                 <Label.Triggers>
                                     <DataTrigger TargetType="Label" 
                                                  Binding="{Binding Found}"
                                                  Value="True">
-                                        <Setter Property="TextColor" 
-                                                Value="Black" />
-                                        <Setter Property="BackgroundColor" 
-                                                Value="LightYellow" />
+                                        <Setter Property="BackgroundColor" Value="LightYellow" />
                                     </DataTrigger>
                                 </Label.Triggers>
                             </Label>
