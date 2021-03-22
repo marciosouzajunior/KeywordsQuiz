@@ -9,7 +9,7 @@ using Xamarin.Forms;
 namespace KeywordsQuiz
 {
 
-    public class MyViewModel : BaseViewModel
+    public class KeywordViewModel : BaseViewModel
     {
 
         private string _scoreLabel;
@@ -49,7 +49,7 @@ namespace KeywordsQuiz
             }
         }
 
-        public MyViewModel()
+        public KeywordViewModel()
         {
             PrepareKeywords();
             UpdateScore();

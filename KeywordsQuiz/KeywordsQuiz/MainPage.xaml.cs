@@ -14,7 +14,7 @@ namespace KeywordsQuiz
         public MainPage()
         {
             InitializeComponent();
-            BindingContext = new MyViewModel();
+            BindingContext = new KeywordViewModel();
         }
 
     }
