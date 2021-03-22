@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="KeywordsQuiz.MainPage">
+
+    <StackLayout>
+
+        <StackLayout Margin="10">
+
+            <StackLayout Orientation="Horizontal">
+                <Label Text="{Binding ScoreLabel}" 
+                       FontSize="15"
+                       HorizontalOptions="StartAndExpand"/>
+                <Label Text="{Binding ScoreLabel}" 
+                       FontSize="15" />
+            </StackLayout>
+            
+            <Entry AutomationProperties.Name="Informe uma keyword"
+                   Text="{Binding KeywordEntry}" />
+
+            <Label Text="Keywords encontradas:" />
+
+            <CollectionView
+                ItemsSource="{Binding KeywordsList}">
+
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout Orientation="Vertical"
+                        Span="2" />
+                 </CollectionView.ItemsLayout>
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame BorderColor="DarkGray"
+                               Padding="1">
+                            <Label Text="{Binding Keyword}"
+                                   VerticalTextAlignment="Center"
+                                   HorizontalTextAlignment="Center">
+                                <Label.Triggers>
+                                    <DataTrigger TargetType="Label" 
+                                                 Binding="{Binding Found}"
+                                                 Value="True">
+                                        <Setter Property="BackgroundColor" Value="LightYellow" />
+                                    </DataTrigger>
+                                </Label.Triggers>
+                            </Label>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+                
+            </CollectionView>
+
+        </StackLayout>        
+        
+    </StackLayout>
+
+</ContentPage>
