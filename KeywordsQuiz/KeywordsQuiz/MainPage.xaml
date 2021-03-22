@@ -11,7 +11,7 @@
                 <Label Text="{Binding ScoreLabel}" 
                        FontSize="15"
                        HorizontalOptions="StartAndExpand"/>
-                <Label Text="{Binding ScoreLabel}" 
+                <Label Text="{Binding TimerLabel}" 
                        FontSize="15" />
             </StackLayout>
             

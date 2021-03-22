@@ -23,6 +23,17 @@ namespace KeywordsQuiz
             }
         }
 
+        private string _timerLabel;
+        public string TimerLabel
+        {
+            get { return _timerLabel; }
+            set
+            {
+                _timerLabel = value;
+                OnPropertyChanged("TimerLabel");
+            }
+        }
+
         private string _keywordEntry;
         public string KeywordEntry
         {
