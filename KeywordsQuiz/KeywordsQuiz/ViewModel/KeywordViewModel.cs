@@ -66,10 +66,10 @@ namespace KeywordsQuiz
 
                 foreach (KeywordModel k in KeywordsList)
                     if (k.Found)
-                        result += k.Keyword + " e ";
+                        result += k.Keyword + "; ";
 
-                return result == "" ? "nenhuma" : 
-                    result.Remove(result.LastIndexOf(" e "));
+                return result == "" ? "nenhuma" :
+                    result.Remove(result.LastIndexOf("; "));
             }
         }
 
@@ -83,24 +83,17 @@ namespace KeywordsQuiz
 
         private void CheckKeyword(string keyword)
         {
-
             KeywordModel foundKeyword = KeywordsList
                 .ToList()
                 .Find(k => k.Keyword == keyword);
 
-            if (foundKeyword != null)
+            if (foundKeyword != null  && !foundKeyword.Found)
             {
-
-                if (!foundKeyword.Found)
-                {
-                    foundKeyword.Found = true;
-                    OnPropertyChanged("FoundKeywords");
-                    KeyworkFound?.Invoke(this, keyword);
-                }
-
+                foundKeyword.Found = true;
+                OnPropertyChanged("FoundKeywords");
+                KeyworkFound?.Invoke(this, keyword);
                 KeywordEntry = "";
                 UpdateScore();
-
             }
         }
 
