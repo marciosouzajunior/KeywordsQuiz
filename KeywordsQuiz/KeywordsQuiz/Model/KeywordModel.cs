@@ -8,10 +8,20 @@ namespace KeywordsQuiz
     public class KeywordModel : BaseViewModel
     {
 
+
         public string Keyword { get; set; }
 
-        private bool _found;
+        // Mostrar somente as encontradas
+        public string KeywordLabel
+        {
+            get {
+                if (!Found)
+                    return "";
+                return Keyword;
+            }
+        }
 
+        private bool _found;
         public bool Found
         {
             get { return _found; }
@@ -19,6 +29,7 @@ namespace KeywordsQuiz
             {
                 _found = value;
                 OnPropertyChanged("Found");
+                OnPropertyChanged("KeywordLabel");
             }
         }
 

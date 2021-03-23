@@ -1,10 +1,7 @@
 ﻿using KeywordsQuiz.Util;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using Xamarin.Forms;
 
 namespace KeywordsQuiz
 {
@@ -60,11 +57,29 @@ namespace KeywordsQuiz
             }
         }
 
+        // Acessibilidade: propriedade para listar as palavras encontradas.
+        public string FoundKeywords
+        {
+            get
+            {
+                string result = "";
+
+                foreach (KeywordModel k in KeywordsList)
+                    if (k.Found)
+                        result += k.Keyword + " e ";
+
+                return result == "" ? "nenhuma" : 
+                    result.Remove(result.LastIndexOf(" e "));
+            }
+        }
+
         public KeywordViewModel()
         {
             PrepareKeywords();
             UpdateScore();
         }
+
+        public event EventHandler<string> KeyworkFound;
 
         private void CheckKeyword(string keyword)
         {
@@ -76,24 +91,15 @@ namespace KeywordsQuiz
             if (foundKeyword != null)
             {
 
-                if (foundKeyword.Found)
-                {
-                    // Já achou, piscar a keyword
-                    return;
-                }
-                else
+                if (!foundKeyword.Found)
                 {
                     foundKeyword.Found = true;
+                    OnPropertyChanged("FoundKeywords");
+                    KeyworkFound?.Invoke(this, keyword);
                 }
 
                 KeywordEntry = "";
                 UpdateScore();
-
-                //if (c == total)
-                //{
-                //    Application.Current.MainPage.DisplayAlert("KeywordQuiz", "Parabéns, você passou na entrevista!", "Ok");
-                //    quer jogar novamente
-                // }
 
             }
         }
@@ -111,6 +117,13 @@ namespace KeywordsQuiz
             ScoreLabel = string.Format("Score: {0}/{1}",
                 KeywordsList.Count(k => k.Found == true),
                 KeywordsList.Count());
+
+
+            //if (c == total)
+            //{
+            //    Application.Current.MainPage.DisplayAlert("KeywordQuiz", "Parabéns, você passou na entrevista!", "Ok");
+            //    quer jogar novamente
+            // }
         }
 
     }
