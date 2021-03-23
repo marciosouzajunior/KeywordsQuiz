@@ -25,5 +25,6 @@ namespace KeywordsQuiz
         {
             DisplayAlert("Mensagem", "Keyword " + e + " encontrada.", "OK");
         }
+
     }
 }

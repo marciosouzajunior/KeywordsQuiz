@@ -2,6 +2,8 @@
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Windows.Input;
+using Xamarin.Forms;
 
 namespace KeywordsQuiz
 {
@@ -46,6 +48,19 @@ namespace KeywordsQuiz
             }
         }
 
+        private bool _playing;
+        public bool Playing
+        {
+            get { return _playing; }
+            set
+            {
+                _playing = value;
+                OnPropertyChanged("Playing");
+            }
+        }
+
+        public ICommand PlayQuizCmd { get; set; }
+
         private ObservableCollection<KeywordModel> _keywordsList;
         public ObservableCollection<KeywordModel> KeywordsList
         {
@@ -77,6 +92,13 @@ namespace KeywordsQuiz
         {
             PrepareKeywords();
             UpdateScore();
+            PlayQuizCmd = new Command(PlayQuiz);
+        }
+
+        private void PlayQuiz(object obj)
+        {
+            Playing = true;
+            // Start timer, se expirar seta playing = false e mostra o %
         }
 
         public event EventHandler<string> KeyworkFound;
@@ -87,7 +109,7 @@ namespace KeywordsQuiz
                 .ToList()
                 .Find(k => k.Keyword == keyword);
 
-            if (foundKeyword != null  && !foundKeyword.Found)
+            if (foundKeyword != null && !foundKeyword.Found)
             {
                 foundKeyword.Found = true;
                 OnPropertyChanged("FoundKeywords");

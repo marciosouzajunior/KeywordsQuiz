@@ -1,29 +1,35 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:util="clr-namespace:KeywordsQuiz.Util"
              x:Class="KeywordsQuiz.MainPage">
 
     <StackLayout Margin="10"
                  Spacing="20">
 
+        <Entry x:Name="entryKeyword"
+               AutomationProperties.IsInAccessibleTree="True"
+               AutomationProperties.Name="Informe uma keyword"
+               Text="{Binding KeywordEntry}"
+               IsVisible="{Binding Playing}"/>
+
+        <Button Text="Play Quiz"
+                Command="{Binding PlayQuizCmd}"
+                IsVisible="{Binding Playing, Converter={util:InverseBoolConverter}}"/>
+
         <StackLayout Orientation="Horizontal">
-                
+
             <Label Text="{Binding ScoreLabel}"
                    FontSize="20"
                    HorizontalOptions="StartAndExpand"                   
                    AutomationProperties.IsInAccessibleTree="True"/>
-                
+
             <Label Text="{Binding TimerLabel}" 
                     FontSize="20"
                     AutomationProperties.IsInAccessibleTree="True"/>
-                
+
         </StackLayout>
-
-        <Entry x:Name="entryKeyword"
-               AutomationProperties.IsInAccessibleTree="True"
-               AutomationProperties.Name="Informe uma keyword"
-               Text="{Binding KeywordEntry}" />
-
+        
         <Label Text="Keywords encontradas:"
                FontSize="20"
                AutomationProperties.IsInAccessibleTree="True"
@@ -70,6 +76,9 @@
 
         </CollectionView>
 
+        <Button Text="Give Up" 
+                IsVisible="{Binding Playing}"/>
+        
     </StackLayout>
 
 </ContentPage>
