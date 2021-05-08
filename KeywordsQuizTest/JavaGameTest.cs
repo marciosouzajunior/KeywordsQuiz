@@ -10,56 +10,55 @@ namespace KeywordsQuizTest
 
 
         [TestMethod]
-        public void Game_ShouldHaveKeywords_WhenCreated()
+        public void SetKeywords_ShoudFillKeywordsList()
         {
-
             // Arrange
-            IGame game = new JavaGame();
-
+            Game game = new JavaGame();
             // Act
-            int keywordsCount = game.keywordsList.Count();
-
+            game.setKeywords(new string[] { "keyword_1", "keyword_2", "keyword_3" });
             // Assert
-            Assert.IsTrue(keywordsCount > 0);
-
+            Assert.IsTrue(game.keywordsList.Count == 3);
         }
 
+        [TestMethod]
+        public void Game_ShouldHaveKeywords_WhenCreated()
+        {           
+            Game game = new JavaGame();
+            int keywordsCount = game.keywordsList.Count();
+            Assert.IsTrue(keywordsCount > 0);
+        }
 
         [TestMethod]
         public void Game_ShouldHaveZeroScore_WhenCreated()
         {
-
-            IGame game = new JavaGame();
-
-            int score = game.score();
-
+            Game game = new JavaGame();
+            int score = game.score;
             Assert.IsTrue(score == 0);
-
         }
 
         [TestMethod]
-        public void CheckKeyword_ShouldReturnTrue_WhenKeywordExist()
+        public void Score_ShouldIncrement_WhenKeyworkExists()
         {
-
-            IGame game = new JavaGame();
-
-            bool exist = game.CheckKeyword("boolean");
-
-            Assert.IsTrue(exist);
-
+            Game game = new JavaGame();
+            game.checkKeyword("boolean");
+            Assert.AreEqual(game.score, 1);
         }
 
-        public void CheckKeyword_ShouldReturnFalse_WhenKeywordDoesntExist()
+        [TestMethod]
+        public void Score_ShouldNotIncrement_WhenKeywordAlreadyFound()
         {
-
-            IGame game = new JavaGame();
-
-            bool exist = game.CheckKeyword("bool");
-
-            Assert.IsFalse(exist);
-
+            Game game = new JavaGame();
+            game.checkKeyword("boolean");
+            game.checkKeyword("boolean");
+            Assert.AreEqual(game.score, 1);
         }
 
+        [TestMethod]
+        public void CheckKeyword_ShouldHandleNullValues()
+        {
+            Game game = new JavaGame();
+            game.checkKeyword(null);
+        }
 
     }
 

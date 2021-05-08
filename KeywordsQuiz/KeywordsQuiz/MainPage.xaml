@@ -8,33 +8,21 @@
                  Spacing="20">
 
         <Entry x:Name="entryKeyword"
-               AutomationProperties.IsInAccessibleTree="True"
-               AutomationProperties.Name="Informe uma keyword"
-               Text="{Binding KeywordEntry}"
-               IsVisible="{Binding Playing}"/>
-
-        <Button Text="Play Quiz"
-                Command="{Binding PlayQuizCmd}"
-                IsVisible="{Binding Playing, Converter={util:InverseBoolConverter}}"/>
+               Text=""/>
 
         <StackLayout Orientation="Horizontal">
 
-            <Label Text="{Binding ScoreLabel}"
+            <Label x:Name="labelScore"
+                   Text="Score ..."
                    FontSize="20"
-                   HorizontalOptions="StartAndExpand"                   
-                   AutomationProperties.IsInAccessibleTree="True"/>
+                   HorizontalOptions="StartAndExpand"/>
 
-            <Label Text="{Binding TimerLabel}" 
-                    FontSize="20"
-                    AutomationProperties.IsInAccessibleTree="True"/>
+            <Label x:Name="labelTimer"
+                   Text="Timer..." 
+                   FontSize="20"/>
 
         </StackLayout>
-        
-        <Label Text="Keywords encontradas:"
-               FontSize="20"
-               AutomationProperties.IsInAccessibleTree="True"
-               AutomationProperties.Name="{Binding FoundKeywords}"/>
-       
+               
         <CollectionView
             ItemsSource="{Binding KeywordsList}"
             SelectionMode="None"
@@ -75,10 +63,7 @@
             </CollectionView.ItemTemplate>
 
         </CollectionView>
-
-        <Button Text="Give Up" 
-                IsVisible="{Binding Playing}"/>
-        
+       
     </StackLayout>
 
 </ContentPage>
