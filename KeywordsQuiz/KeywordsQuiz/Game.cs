@@ -23,18 +23,24 @@ namespace KeywordsQuiz
 
         }
 
-        public void checkKeyword(string keyword)
+        public bool processInput(string keyword)
         {
 
             Keyword keyworkMatch = keywordsList
                 .ToList()
                 .Find(k => k.Name == keyword);
 
-            if (keyworkMatch != null && !keyworkMatch.Found)
+            if (keyworkMatch == null)
+                return false;
+
+            // Score only if have not found before
+            if (!keyworkMatch.Found)
             {
                 keyworkMatch.Found = true;
                 score++;
             }
+
+            return true;
 
         }
 

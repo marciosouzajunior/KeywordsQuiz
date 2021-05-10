@@ -17,7 +17,7 @@ namespace KeywordsQuizTest
             // Act
             game.setKeywords(new string[] { "keyword_1", "keyword_2", "keyword_3" });
             // Assert
-            Assert.IsTrue(game.keywordsList.Count == 3);
+            Assert.AreEqual(game.keywordsList.Count, 3);
         }
 
         [TestMethod]
@@ -33,14 +33,30 @@ namespace KeywordsQuizTest
         {
             Game game = new JavaGame();
             int score = game.score;
-            Assert.IsTrue(score == 0);
+            Assert.AreEqual(score, 0);
+        }
+
+        [TestMethod]
+        public void ProcessInput_ShoudReturnTrue_WhenKeyworkExists()
+        {
+            Game game = new JavaGame();
+            bool result = game.processInput("boolean");
+            Assert.AreEqual(result, true);
+        }
+
+        [TestMethod]
+        public void ProcessInput_ShoudReturnFalse_WhenKeyworkDoesntExist()
+        {
+            Game game = new JavaGame();
+            bool result = game.processInput("bool");
+            Assert.AreEqual(result, false);
         }
 
         [TestMethod]
         public void Score_ShouldIncrement_WhenKeyworkExists()
         {
             Game game = new JavaGame();
-            game.checkKeyword("boolean");
+            game.processInput("boolean");
             Assert.AreEqual(game.score, 1);
         }
 
@@ -48,16 +64,24 @@ namespace KeywordsQuizTest
         public void Score_ShouldNotIncrement_WhenKeywordAlreadyFound()
         {
             Game game = new JavaGame();
-            game.checkKeyword("boolean");
-            game.checkKeyword("boolean");
+            game.processInput("boolean");
+            game.processInput("boolean");
             Assert.AreEqual(game.score, 1);
         }
 
         [TestMethod]
-        public void CheckKeyword_ShouldHandleNullValues()
+        public void ProcessInput_ShouldHandleNullValues()
         {
             Game game = new JavaGame();
-            game.checkKeyword(null);
+            game.processInput(null);
+        }
+
+        [TestMethod]
+        public void Keyword_ShoudHaveNameAndState_WhenCreated()
+        {
+            Keyword keyword = new Keyword("boolean", false);
+            Assert.AreEqual(keyword.Name, "boolean");
+            Assert.AreEqual(keyword.Found, false);
         }
 
     }
