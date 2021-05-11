@@ -1,19 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:util="clr-namespace:KeywordsQuiz.Util"
              x:Class="KeywordsQuiz.MainPage">
 
     <StackLayout Margin="10"
                  Spacing="20">
 
         <Entry x:Name="entryKeyword"
-               Text=""/>
+               TextChanged="entryKeyword_TextChanged"/>
 
         <StackLayout Orientation="Horizontal">
 
             <Label x:Name="labelScore"
-                   Text="Score ..."
                    FontSize="20"
                    HorizontalOptions="StartAndExpand"/>
 
@@ -24,7 +22,7 @@
         </StackLayout>
                
         <CollectionView
-            ItemsSource="{Binding KeywordsList}"
+            x:Name="collectionView"
             SelectionMode="None"
             AutomationProperties.IsInAccessibleTree="False">
 
@@ -40,17 +38,17 @@
                     <Frame BorderColor="DarkGray"
                            Padding="1">
 
-                        <Label Text="{Binding KeywordLabel}"
+                        <Label Text="{Binding Name}"
                                VerticalTextAlignment="Center"
                                HorizontalTextAlignment="Center"
-                               AutomationProperties.IsInAccessibleTree="False">
+                               IsVisible="False">
                                 
                             <Label.Triggers>
                                 <DataTrigger TargetType="Label" 
                                              Binding="{Binding Found}"
                                              Value="True">
-                                    <Setter Property="BackgroundColor" 
-                                            Value="LightYellow" />
+                                    <Setter Property="IsVisible" 
+                                            Value="True" />
                                 </DataTrigger>
                             </Label.Triggers>
                                 

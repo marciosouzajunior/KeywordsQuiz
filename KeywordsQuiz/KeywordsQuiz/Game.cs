@@ -1,4 +1,4 @@
-﻿using System.Collections.ObjectModel;
+﻿using System.Collections.Generic;
 using System.Linq;
 
 namespace KeywordsQuiz
@@ -6,7 +6,7 @@ namespace KeywordsQuiz
     public abstract class Game
     {
 
-        public ObservableCollection<Keyword> keywordsList;
+        public List<Keyword> keywordsList;
         public int score;
 
         public Game()
@@ -17,7 +17,7 @@ namespace KeywordsQuiz
         public void setKeywords(string[] keywordsArr)
         {
             
-            keywordsList = new ObservableCollection<Keyword>();
+            keywordsList = new List<Keyword>();
             foreach (var keyword in keywordsArr)
                 keywordsList.Add(new Keyword(keyword, false));
 
